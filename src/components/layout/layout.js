@@ -5,9 +5,8 @@ import FindCityForm from "../findCityForm/findCityForm";
 const Layout = () => {
   return (
     <div className="container">
-      <h1 className="text-center">Welcome to weather forecast app!</h1>
-
-      <div className="row">
+      <h1 className="text-center">Welcome to the weather forecast app!</h1>
+      <div className="row flex-column-reverse flex-md-row">
         <div className="col-12 col-md-6 col-lg-4 col-xl-3">
           <FindCityForm></FindCityForm>
         </div>
