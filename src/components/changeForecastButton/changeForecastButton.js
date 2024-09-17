@@ -1,21 +1,25 @@
 import { useNavigate, useLocation } from "react-router-dom";
+import {
+  fiveDaysForecastUrl,
+  currentForecastUrl,
+  fiveDaysForecastText,
+  currentForecastText,
+} from "../../utils/consts";
 
-const ChangeForecastButton = () => {
+const ChangeForecastButton = ({ isFiveDaysForecast }) => {
   let location = useLocation();
   const navigate = useNavigate();
 
-  const isFiveDaysForecast = location.pathname.includes("five-days-forecast");
   const newPathname = isFiveDaysForecast
-    ? location.pathname.replace("five-days-forecast", "current-forecast")
-    : location.pathname.replace("current-forecast", "five-days-forecast");
+    ? location.pathname.replace(fiveDaysForecastUrl, currentForecastUrl)
+    : location.pathname.replace(currentForecastUrl, fiveDaysForecastUrl);
 
   const changeForecast = () => {
     navigate(`${newPathname}${location.search}`);
   };
   return (
     <button type="button" onClick={changeForecast} className="btn btn-primary">
-      display{" "}
-      {isFiveDaysForecast ? "current forecast" : "5 days weather forecast"}
+      display {isFiveDaysForecast ? currentForecastText : fiveDaysForecastText}
     </button>
   );
 };

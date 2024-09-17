@@ -19,7 +19,7 @@ const FiveDaysForecast = () => {
   return (
     <>
       <ul
-        class="days-list list-group list-group-horizontal my-2"
+        className="days-list list-group list-group-horizontal my-2"
         onClick={onDateClick}
       >
         {daysData.map((el, i) => {
@@ -32,7 +32,7 @@ const FiveDaysForecast = () => {
           );
         })}
       </ul>
-      <table class="table table-striped ">
+      <table className="table table-striped ">
         <thead>
           <tr>
             <th scope="col">Date</th>

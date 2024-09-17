@@ -7,11 +7,11 @@ const Layout = () => {
     <div className="container">
       <h1 className="text-center">Welcome to weather forecast app!</h1>
 
-      <div class="row align-items-start">
-        <div class="col">
+      <div className="row">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3">
           <FindCityForm></FindCityForm>
         </div>
-        <div class="col">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3">
           <Preferences></Preferences>
         </div>
       </div>

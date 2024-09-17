@@ -5,7 +5,7 @@ const CurrentForecast = () => {
   console.log("CurrentForecast data", data);
 
   return (
-    <table class="table table-striped">
+    <table className="table table-striped">
       <thead>
         <tr>
           <th scope="col">Time stamp</th>

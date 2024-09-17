@@ -14,16 +14,18 @@ import {
   currentForecastLoader,
   fiveDaysForecastLoader,
 } from "./loaders";
+import {
+  fiveDaysForecastUrl,
+  currentForecastUrl,
+  cityUrl,
+} from "../../utils/consts";
 
-// TODO: add loading indicator
 // TODO: add caching requests https://www.npmjs.com/package/localforage
 // TODO: add filelds validation
-// TODO: add labels to forms
 // TODO: check error bounaries
 // TODO: impove request management
 // TODO: add README.md
 // check memo!
-// add consts.js file with routes and texts
 
 const ErrorBoundary = () => {
   let location = useLocation();
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
     errorElement: ErrorPage,
     children: [
       {
-        path: "city",
+        path: cityUrl,
         Component: ChooseTown,
         ErrorBoundary: ErrorBoundary,
         loader: cityLoader,
@@ -48,14 +50,14 @@ const router = createBrowserRouter([
             ErrorBoundary: ErrorBoundary,
             children: [
               {
-                path: "current-forecast",
+                path: currentForecastUrl,
                 Component: CurrentForecast,
                 ErrorBoundary: ErrorBoundary,
                 loader: currentForecastLoader,
               },
 
               {
-                path: "five-days-forecast",
+                path: fiveDaysForecastUrl,
                 Component: FiveDaysForecast,
                 ErrorBoundary: ErrorBoundary,
                 loader: fiveDaysForecastLoader,
