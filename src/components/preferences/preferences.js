@@ -15,18 +15,19 @@ const Preferences = () => {
   ];
 
   return (
-    <>
-      <div>Preferences</div>
-      <ul>
+    <div>
+      <h2 className="h3">Preferences</h2>
+      <p>You can find previous requests here in the list below</p>
+      <ul className="list-group">
         {data.map((el) => {
           return (
-            <li key={el.coord}>
+            <li key={el.coord} className="list-group-item">
               {el.name} ({el.country}, {el.state})
             </li>
           );
         })}
       </ul>
-    </>
+    </div>
   );
 };
 

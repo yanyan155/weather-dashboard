@@ -16,14 +16,14 @@ import {
 } from "./loaders";
 
 // TODO: add loading indicator
-// TODO: add wordpress
 // TODO: add caching requests https://www.npmjs.com/package/localforage
 // TODO: add filelds validation
 // TODO: add labels to forms
 // TODO: check error bounaries
-// TODO: impove request management (create separate service)
+// TODO: impove request management
 // TODO: add README.md
 // check memo!
+// add consts.js file with routes and texts
 
 const ErrorBoundary = () => {
   let location = useLocation();

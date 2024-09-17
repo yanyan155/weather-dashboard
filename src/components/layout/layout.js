@@ -1,16 +1,21 @@
-import { Outlet, Form } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Preferences from "../preferences/preferences";
+import FindCityForm from "../findCityForm/findCityForm";
 
 const Layout = () => {
   return (
-    <div>
-      <h1>Welcome to weather forecast app!</h1>
-      <Form method="get" action="/city">
-        <p>Find city</p>
-        <input type="text" name="cityName" placeholder="type city to search" />
-        <input type="submit" value="Submit" />
-      </Form>
-      <Preferences></Preferences>
+    <div className="container">
+      <h1 className="text-center">Welcome to weather forecast app!</h1>
+
+      <div class="row align-items-start">
+        <div class="col">
+          <FindCityForm></FindCityForm>
+        </div>
+        <div class="col">
+          <Preferences></Preferences>
+        </div>
+      </div>
+
       <Outlet />
     </div>
   );
