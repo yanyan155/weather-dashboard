@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const ChooseTown = () => {
   let data = useLoaderData();
-
+  console.log("ChooseTown data", data);
   const submit = useSubmit();
 
   const isDataExists = data?.length > 0;
@@ -13,9 +13,6 @@ const ChooseTown = () => {
     <>
       {isDataExists && (
         <Form
-          onChange={(event) => {
-            setCurrent(event.target.value);
-          }}
           onSubmit={(event) => {
             event.preventDefault();
             const selected = data[current];
@@ -27,10 +24,16 @@ const ChooseTown = () => {
           }}
         >
           <p>Please select town</p>
-          <select name="choose-city" value={current}>
+          <select
+            name="choose-city"
+            value={current}
+            onChange={(event) => {
+              setCurrent(event.target.value);
+            }}
+          >
             {data.map((el, i) => {
               return (
-                <option value={i}>
+                <option key={i} value={i}>
                   {el.name} ({el.country ? `country: ${el.country}` : ""}{" "}
                   {el.state ? `state: ${el.state}` : ""})
                 </option>

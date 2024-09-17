@@ -2,13 +2,15 @@ import { useLoaderData } from "react-router-dom";
 
 const CurrentForecast = () => {
   let data = useLoaderData();
+  console.log("CurrentForecast data", data);
+
   return (
     <ul>
-      <li>Time stamp: 8.09.2024</li>
-      <li>weather conditions: {data.weather[0].description}</li>
-      <li>temperature: {data.main.temp} Kelvin</li>
-      <li>humidity: {data.main.humidity} %</li>
-      <li>wind speed: {data.wind.speed} meter/sec</li>
+      <li>Time stamp: {data.timeStamp}</li>
+      <li>weather conditions: {data.description}</li>
+      <li>temperature: {data.temperature} Kelvin</li>
+      <li>humidity: {data.humidity} %</li>
+      <li>wind speed: {data.windSpeed} meter/sec</li>
     </ul>
   );
 };

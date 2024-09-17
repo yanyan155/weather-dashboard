@@ -2,17 +2,18 @@ import { useLoaderData } from "react-router-dom";
 
 const FiveDaysForecast = () => {
   let data = useLoaderData();
+  console.log("FiveDaysForecast data", data);
+
   return (
     <>
-      {data.list.map((el) => {
+      {data.map((el) => {
         return (
           <ul>
-            <li>Time stamp: 8.09.2024</li>
-            <li>weather conditions: {el.weather[0].description}</li>
-            <li>temperature: {el.main.temp} Kelvin</li>
-            <li>humidity: {el.main.humidity} %</li>
-            <li>wind speed: {el.wind.speed} meter/sec</li>
-            <li>date: {el.dt_txt}</li>
+            <li>date: {el.date}</li>
+            <li>weather conditions: {el.description}</li>
+            <li>temperature: {el.temperature} Kelvin</li>
+            <li>humidity: {el.humidity} %</li>
+            <li>wind speed: {el.windSpeed} meter/sec</li>
           </ul>
         );
       })}

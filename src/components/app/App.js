@@ -9,7 +9,11 @@ import ChooseTown from "../chooseTown/chooseTown";
 import CityForecast from "../cityForecast/cityForecast";
 import CurrentForecast from "../currentForecast/currentForecast";
 import FiveDaysForecast from "../fiveDaysForecast/fiveDaysForecast";
-import { getResource } from "../../utils";
+import {
+  cityLoader,
+  currentForecastLoader,
+  fiveDaysForecastLoader,
+} from "./loaders";
 
 // TODO: add loading indicator
 // TODO: add wordpress
@@ -19,6 +23,7 @@ import { getResource } from "../../utils";
 // TODO: check error bounaries
 // TODO: impove request management (create separate service)
 // TODO: add README.md
+// check memo!
 
 const ErrorBoundary = () => {
   let location = useLocation();
@@ -35,14 +40,7 @@ const router = createBrowserRouter([
         path: "city",
         Component: ChooseTown,
         ErrorBoundary: ErrorBoundary,
-        loader: async ({ request, params }) => {
-          const [, searchParams] = request.url.split("?");
-          const searchTerm = new URLSearchParams(searchParams).get("cityName");
-
-          return await getResource(
-            `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=10`
-          );
-        },
+        loader: cityLoader,
         children: [
           {
             path: ":town",
@@ -53,30 +51,14 @@ const router = createBrowserRouter([
                 path: "current-forecast",
                 Component: CurrentForecast,
                 ErrorBoundary: ErrorBoundary,
-                loader: async ({ request, params }) => {
-                  const [, searchParams] = request.url.split("?");
-                  const lat = new URLSearchParams(searchParams).get("lat");
-                  const lon = new URLSearchParams(searchParams).get("lon");
-
-                  return await getResource(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}`
-                  );
-                },
+                loader: currentForecastLoader,
               },
 
               {
                 path: "five-days-forecast",
                 Component: FiveDaysForecast,
                 ErrorBoundary: ErrorBoundary,
-                loader: async ({ request, params }) => {
-                  const [, searchParams] = request.url.split("?");
-                  const lat = new URLSearchParams(searchParams).get("lat");
-                  const lon = new URLSearchParams(searchParams).get("lon");
-
-                  return await getResource(
-                    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}`
-                  );
-                },
+                loader: fiveDaysForecastLoader,
               },
             ],
           },
