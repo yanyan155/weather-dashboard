@@ -18,8 +18,8 @@ const ChangeForecastButton = ({ isFiveDaysForecast }) => {
     navigate(`${newPathname}${location.search}`);
   };
   return (
-    <button type="button" onClick={changeForecast} className="btn btn-primary">
-      display {isFiveDaysForecast ? currentForecastText : fiveDaysForecastText}
+    <button type="button" onClick={changeForecast} className="btn btn-info">
+      {isFiveDaysForecast ? currentForecastText : fiveDaysForecastText}
     </button>
   );
 };

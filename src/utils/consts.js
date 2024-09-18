@@ -3,6 +3,7 @@ const currentForecastUrl = "current-forecast";
 const fiveDaysForecastText = "5 days weather forecast";
 const currentForecastText = "current forecast";
 const cityUrl = "city";
+const findUrl = "find";
 
 export {
   fiveDaysForecastUrl,
@@ -10,4 +11,5 @@ export {
   fiveDaysForecastText,
   currentForecastText,
   cityUrl,
+  findUrl,
 };

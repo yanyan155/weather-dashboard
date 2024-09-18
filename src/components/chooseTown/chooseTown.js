@@ -46,14 +46,19 @@ const ChooseTown = () => {
                   );
                 })}
               </select>
-              <button type="submit" className="btn btn-primary mt-2">
+              <button type="submit" className="btn btn-primary mt-3">
                 Submit
               </button>
             </Form>
           </div>
         </div>
       )}
-      {!isDataExists && <p>Looks like we can't find the city.</p>}
+      {!isDataExists && (
+        <>
+          <h2 className="h4">Oops!</h2>
+          <p>Looks like we can't find the city. Please try another city</p>
+        </>
+      )}
       <Outlet />
     </>
   );

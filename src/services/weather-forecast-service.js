@@ -67,8 +67,7 @@ export default class WeatherForecastService {
   };
 
   toDateTime = (secs) => {
-    const date = new Date(1970, 0, 1);
-    date.setSeconds(secs);
-    return date.toISOString().replace("T", " ").replace(".000Z", "");
+    const date = new Date(secs * 1000);
+    return date.toISOString().replace("T", " ").replace(".000Z", " (GMT+0)");
   };
 }

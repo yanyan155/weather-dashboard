@@ -16,8 +16,7 @@ const Preferences = () => {
 
   return (
     <div>
-      <h2 className="h3">Preferences</h2>
-      <p>Fast access to previous requests</p>
+      <h2 className="h4">Preferences</h2>
       <ul className="list-group">
         {data.map((el) => {
           return (

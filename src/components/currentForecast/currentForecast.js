@@ -4,10 +4,10 @@ const CurrentForecast = () => {
   let data = useLoaderData();
 
   return (
-    <table className="table table-striped">
+    <table className="table table-striped table-bordered text-center align-middle">
       <thead>
         <tr>
-          <th scope="col">Time stamp</th>
+          <th scope="col">Date</th>
           <th scope="col">Weather</th>
           <th scope="col">Temperature, Kelvin</th>
           <th scope="col">Humidity, %</th>

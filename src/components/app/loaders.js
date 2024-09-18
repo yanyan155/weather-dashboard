@@ -6,42 +6,15 @@ const citiesStore = new DataStorageService("city");
 const currentForecastStore = new DataStorageService("currentForecast");
 const fiveDaysForecastStore = new DataStorageService("fiveDaysForecast");
 
-Promise.resolve()
-  .then(async () => {
-    await citiesStore.setItem("cat", "cat");
-    await citiesStore.setItem("dog", "dog");
-    await citiesStore.setItem("3x", "3");
-    await citiesStore.setItem("1x", "1");
-    await citiesStore.setItem("a", "a");
-  })
-  .then(async () => {
-    await citiesStore.clearStaleData();
-  })
-  .then(async () => {
-    await citiesStore.setItem("1", "1");
-    await citiesStore.setItem("2", "2");
-    await citiesStore.setItem("0", "0");
-    await citiesStore.setItem("2x", "2");
-    await citiesStore.setItem("frog", "frog");
-    await citiesStore.setItem("0x", "0");
-    await citiesStore.setItem("3x", "3");
-  })
-  .then(async () => {
-    citiesStore.clearStaleData();
-  })
-  .then(async () => {
-    await citiesStore.clear();
-  });
-
-const sliceUrl = (cityUrl) => {
-  const index = cityUrl.indexOf("/city");
-  return cityUrl.slice(index + 5);
+const sliceUrl = (url, matcher) => {
+  const index = url.indexOf(matcher);
+  return url.slice(index + matcher.length);
 };
 
 const cityLoader = async ({ request }) => {
   const [, searchParams] = request.url.split("?");
-  const searchTerm = new URLSearchParams(searchParams).get("cityName"); // error here when go to weather forecast (try town 'minsk')
-  const key = sliceUrl(request.url);
+  const searchTerm = new URLSearchParams(searchParams).get("cityName");
+  const key = sliceUrl(request.url, "/find");
   const res = await citiesStore.getItem(key);
   if (res) {
     return res.data;
@@ -52,6 +25,12 @@ const cityLoader = async ({ request }) => {
     }
     return value;
   }
+};
+
+const layoutLoader = async ({ request }) => {
+  const url = new URL(request.url);
+  const cityName = url.searchParams.get("cityName");
+  return { cityName };
 };
 
 const getCoords = (request) => {
@@ -65,14 +44,14 @@ const currentForecastLoader = async ({ request }) => {
   const [lat, lon] = getCoords(request);
   console.log("currentForecastLoader", request);
 
-  const key = sliceUrl(request.url);
+  const key = sliceUrl(request.url, "/city");
   const res = await currentForecastStore.getItem(key);
   if (res) {
     return res.data;
   } else {
     const value = await weatherForecastService.getCurrentForecast(lat, lon);
     if (value && value.length > 0) {
-      await currentForecastStore.setItem(key, value); // PUSH DATA TO preferenses
+      await currentForecastStore.setItem(key, value);
     }
     return value;
   }
@@ -82,7 +61,7 @@ const fiveDaysForecastLoader = async ({ request }) => {
   const [lat, lon] = getCoords(request);
   console.log("fiveDaysForecastLoader", request);
 
-  const key = sliceUrl(request.url);
+  const key = sliceUrl(request.url, "/city");
   const res = await fiveDaysForecastStore.getItem(key);
   if (res) {
     return res.data;
@@ -95,4 +74,9 @@ const fiveDaysForecastLoader = async ({ request }) => {
   }
 };
 
-export { cityLoader, currentForecastLoader, fiveDaysForecastLoader };
+export {
+  cityLoader,
+  currentForecastLoader,
+  fiveDaysForecastLoader,
+  layoutLoader,
+};

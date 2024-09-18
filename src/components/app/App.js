@@ -9,16 +9,17 @@ import {
   cityLoader,
   currentForecastLoader,
   fiveDaysForecastLoader,
+  layoutLoader,
 } from "./loaders";
+import { preferAction } from "./actions";
 import {
   fiveDaysForecastUrl,
   currentForecastUrl,
   cityUrl,
+  findUrl,
 } from "../../utils/consts";
 
-// TODO: add caching requests https://www.npmjs.com/package/localforage
 // TODO: add filelds validation
-// TODO: check error bounaries
 // TODO: impove request management
 // TODO: add README.md
 // check memo!
@@ -28,31 +29,32 @@ const router = createBrowserRouter([
     path: "/",
     Component: Layout,
     errorElement: ErrorPage,
+    loader: layoutLoader,
     children: [
       {
-        path: cityUrl,
+        path: findUrl,
         Component: ChooseTown,
         ErrorBoundary: ErrorPage,
         loader: cityLoader,
+      },
+      {
+        path: `${cityUrl}/:town`,
+        Component: CityForecast,
+        ErrorBoundary: ErrorPage,
         children: [
           {
-            path: ":town",
-            Component: CityForecast,
+            path: currentForecastUrl,
+            Component: CurrentForecast,
             ErrorBoundary: ErrorPage,
-            children: [
-              {
-                path: currentForecastUrl,
-                Component: CurrentForecast, // when new city is Added -> refresh preferences
-                ErrorBoundary: ErrorPage,
-                loader: currentForecastLoader,
-              },
-              {
-                path: fiveDaysForecastUrl,
-                Component: FiveDaysForecast,
-                ErrorBoundary: ErrorPage,
-                loader: fiveDaysForecastLoader,
-              },
-            ],
+            loader: currentForecastLoader,
+            action: preferAction,
+          },
+          {
+            path: fiveDaysForecastUrl,
+            Component: FiveDaysForecast,
+            ErrorBoundary: ErrorPage,
+            loader: fiveDaysForecastLoader,
+            action: preferAction,
           },
         ],
       },

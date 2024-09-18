@@ -16,7 +16,7 @@ const FiveDaysForecast = () => {
   return (
     <>
       <ul
-        className="days-list list-group list-group-horizontal my-2"
+        className="days-list list-group list-group-horizontal my-3"
         onClick={onDateClick}
       >
         {daysData.map((el, i) => {
@@ -29,10 +29,10 @@ const FiveDaysForecast = () => {
           );
         })}
       </ul>
-      <table className="table table-striped ">
+      <table className="table table-striped table-bordered text-center align-middle">
         <thead>
           <tr>
-            <th scope="col">Date</th>
+            <th scope="col">Time</th>
             <th scope="col">Weather</th>
             <th scope="col">Temperature, Kelvin</th>
             <th scope="col">Humidity, %</th>
@@ -43,7 +43,7 @@ const FiveDaysForecast = () => {
           {daysData[index].data.map((el) => {
             const [, time] = el.date.split(" ");
             return (
-              <tr>
+              <tr key={`${index}-${time}`}>
                 <td>{time}</td>
                 <td>{el.description}</td>
                 <td>{el.temperature}</td>

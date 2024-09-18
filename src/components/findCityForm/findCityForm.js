@@ -1,22 +1,29 @@
-import { Form } from "react-router-dom";
-import { cityUrl } from "../../utils/consts";
+import { useEffect } from "react";
+import { Form, useLoaderData } from "react-router-dom";
+import { findUrl } from "../../utils/consts";
 
 const FindCityForm = () => {
-  const action = `/${cityUrl}`;
+  const { cityName } = useLoaderData();
+
+  useEffect(() => {
+    document.getElementById("cityName").value = cityName;
+  }, [cityName]);
+
   return (
-    <Form method="get" action={action}>
-      <h2 className="h3">Find a city</h2>
-      <label htmlFor="city-name-input" className="col-form-label">
-        City
-      </label>
+    <Form method="get" action={`/${findUrl}`}>
+      <h2 className="h4" id="cityFormTitle">
+        Find a city
+      </h2>
       <input
         type="text"
-        id="city-name-input"
         name="cityName"
+        id="cityName"
         placeholder="type city to search"
         className="form-control"
+        defaultValue={cityName}
+        aria-labelledby="cityFormTitle"
       />
-      <button type="submit" className="btn btn-primary mt-2">
+      <button type="submit" className="btn btn-primary mt-3">
         Submit
       </button>
     </Form>
