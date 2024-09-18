@@ -17,7 +17,7 @@ export default class DataStorageService {
   setItem = async (key, value) => {
     try {
       if (this.length >= this.sizeLimit) {
-        await this.clearStaleData(); // TODO: call it after setItem
+        setTimeout(this.clearStaleData, 500);
       }
       const obj = {
         date: Date.now(),
@@ -57,6 +57,7 @@ export default class DataStorageService {
   clearStaleData = async () => {
     try {
       const keysArr = await this.store.keys();
+      // console.log("keys before", keysArr);
       let keysDateArr = await Promise.allSettled(
         keysArr.map(async (el) => {
           const item = await this.store.getItem(el);
@@ -80,6 +81,8 @@ export default class DataStorageService {
           await this.store.removeItem(el.value.key);
         }
       });
+      // const keysArrnew = await this.store.keys();
+      // console.log("keys after", keysArrnew);
     } catch (err) {
       console.log(err);
     }

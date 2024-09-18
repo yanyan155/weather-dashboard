@@ -15,7 +15,6 @@ export default class WeatherForecastService {
     const res = await this.getResource(
       `/geo/1.0/direct?q=${searchTerm}&limit=10`
     );
-
     return this.prepareCityData(res);
   };
 
@@ -23,7 +22,6 @@ export default class WeatherForecastService {
     const res = await this.getResource(
       `/data/2.5/weather?lat=${lat}&lon=${lon}`
     );
-
     return this.prepareCurrentForecastData(res);
   };
 
