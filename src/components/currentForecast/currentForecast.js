@@ -2,7 +2,6 @@ import { useLoaderData } from "react-router-dom";
 
 const CurrentForecast = () => {
   let data = useLoaderData();
-  console.log("CurrentForecast data", data);
 
   return (
     <table className="table table-striped">

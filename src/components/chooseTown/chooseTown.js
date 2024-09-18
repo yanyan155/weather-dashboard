@@ -4,7 +4,6 @@ import { currentForecastUrl, cityUrl } from "../../utils/consts";
 
 const ChooseTown = () => {
   let data = useLoaderData();
-  console.log("ChooseTown data", data);
   const submit = useSubmit();
 
   const isDataExists = data?.length > 0;

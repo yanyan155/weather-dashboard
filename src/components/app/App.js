@@ -1,8 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useLocation,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "../error-page/error-page";
 import Layout from "../layout/layout";
 import ChooseTown from "../chooseTown/chooseTown";
@@ -27,11 +23,6 @@ import {
 // TODO: add README.md
 // check memo!
 
-const ErrorBoundary = () => {
-  let location = useLocation();
-  return <div>some error occurs in {location.pathname}</div>;
-};
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,25 +32,24 @@ const router = createBrowserRouter([
       {
         path: cityUrl,
         Component: ChooseTown,
-        ErrorBoundary: ErrorBoundary,
+        ErrorBoundary: ErrorPage,
         loader: cityLoader,
         children: [
           {
             path: ":town",
             Component: CityForecast,
-            ErrorBoundary: ErrorBoundary,
+            ErrorBoundary: ErrorPage,
             children: [
               {
                 path: currentForecastUrl,
-                Component: CurrentForecast,
-                ErrorBoundary: ErrorBoundary,
+                Component: CurrentForecast, // when new city is Added -> refresh preferences
+                ErrorBoundary: ErrorPage,
                 loader: currentForecastLoader,
               },
-
               {
                 path: fiveDaysForecastUrl,
                 Component: FiveDaysForecast,
-                ErrorBoundary: ErrorBoundary,
+                ErrorBoundary: ErrorPage,
                 loader: fiveDaysForecastLoader,
               },
             ],

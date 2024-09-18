@@ -6,9 +6,6 @@ import "./fiveDaysForecast.css";
 const FiveDaysForecast = () => {
   let data = useLoaderData();
   const daysData = findDaysData(data);
-  console.log("FiveDaysForecast data", data);
-
-  console.log("daysData", findDaysData(data));
   const [index, setIndex] = useState(0);
 
   const onDateClick = (e) => {
