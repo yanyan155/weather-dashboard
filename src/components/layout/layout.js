@@ -7,7 +7,7 @@ const Layout = () => {
     <div className="container mt-2">
       <h1 className="text-center h2 ">Welcome to the weather forecast app!</h1>
       <section className="row flex-column-reverse flex-md-row my-2">
-        <div className="col-12 col-md-6 col-lg-4 col-xl-3 my-2 my-sm-2 mt-md-4">
+        <div className="col-12 col-md-6 col-lg-4 col-xl-3">
           <FindCityForm></FindCityForm>
         </div>
         <div className="col-12 col-md-6 col-lg-4 col-xl-3 my-2 my-sm-2 my-md-0">

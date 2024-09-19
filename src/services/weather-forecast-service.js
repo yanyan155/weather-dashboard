@@ -1,9 +1,10 @@
+import { appid } from "../env.variables";
+
 export default class WeatherForecastService {
-  appid = "f54e26292e8a7851c509d107a3730b1d";
   apiBase = "https://api.openweathermap.org";
 
   getResource = async (url) => {
-    const res = await fetch(`${this.apiBase}${url}&appid=${this.appid}`);
+    const res = await fetch(`${this.apiBase}${url}&appid=${appid}`);
 
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}, received ${res.status}`);
@@ -29,7 +30,6 @@ export default class WeatherForecastService {
     const res = await this.getResource(
       `/data/2.5/forecast?lat=${lat}&lon=${lon}`
     );
-    console.log("getFiveDaysForecast", res);
     return this.prepareFiveDaysForecastData(res);
   };
 

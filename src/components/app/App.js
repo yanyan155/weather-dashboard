@@ -17,10 +17,6 @@ import {
   findUrl,
 } from "../../utils/consts";
 
-// TODO: impove request management
-// TODO: add README.md
-// check memo!
-
 const router = createBrowserRouter([
   {
     path: "/",

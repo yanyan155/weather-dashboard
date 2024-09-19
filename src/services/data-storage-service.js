@@ -75,7 +75,7 @@ export default class DataStorageService {
       keysDateArr.forEach(async (el, i) => {
         if (
           i < 50 ||
-          (dateNow - el.value.date > this.timeOut[this.timeOutType] && i < 80)
+          dateNow - el.value.date > this.timeOut[this.timeOutType]
         ) {
           await this.store.removeItem(el.value.key);
         }
@@ -91,7 +91,7 @@ class QueueDataStorageService {
     this.store = localforage.createInstance({
       name: name,
     });
-    this.sizeLimit = 3;
+    this.sizeLimit = 4;
   }
 
   setItem = async (value) => {

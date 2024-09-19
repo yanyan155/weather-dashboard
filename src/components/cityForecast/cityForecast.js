@@ -1,8 +1,9 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigation } from "react-router-dom";
 import ChangeForecastButton from "../changeForecastButton/changeForecastButton";
 import FiveDaysForecast from "../fiveDaysForecast/fiveDaysForecast";
 import CurrentForecast from "../currentForecast/currentForecast";
 import PreferButton from "../preferButton/preferButton";
+import "./cityForecast.css";
 
 import {
   fiveDaysForecastUrl,
@@ -11,6 +12,7 @@ import {
 } from "../../utils/consts";
 
 const CityForecast = () => {
+  const navigation = useNavigation();
   let params = useParams();
   let location = useLocation();
 
@@ -27,11 +29,17 @@ const CityForecast = () => {
           isFiveDaysForecast={isFiveDaysForecast}
         ></ChangeForecastButton>
       </div>
-      {isFiveDaysForecast ? (
-        <FiveDaysForecast></FiveDaysForecast>
-      ) : (
-        <CurrentForecast></CurrentForecast>
-      )}
+      <div
+        className={`forecast ${
+          navigation.state === "loading" ? "loading" : ""
+        }`}
+      >
+        {isFiveDaysForecast ? (
+          <FiveDaysForecast></FiveDaysForecast>
+        ) : (
+          <CurrentForecast></CurrentForecast>
+        )}
+      </div>
     </section>
   );
 };

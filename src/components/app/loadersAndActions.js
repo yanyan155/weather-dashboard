@@ -33,7 +33,6 @@ const cityLoader = async ({ request }) => {
 };
 
 const layoutLoader = async ({ request }) => {
-  console.log("layoutLoader", request);
   const url = new URL(request.url);
   const cityName = url.searchParams.get("cityName");
   const preferred = await preferredStore.getItems();
@@ -48,7 +47,6 @@ const getCoords = (url) => {
 
 const currentForecastLoader = async ({ request }) => {
   const [lat, lon] = getCoords(request.url);
-  console.log("currentForecastLoader", request);
 
   const key = sliceUrl(request.url, `/${cityUrl}`);
   const res = await currentForecastStore.getItem(key);
@@ -65,7 +63,6 @@ const currentForecastLoader = async ({ request }) => {
 
 const fiveDaysForecastLoader = async ({ request }) => {
   const [lat, lon] = getCoords(request.url);
-  console.log("fiveDaysForecastLoader", request);
 
   const key = sliceUrl(request.url, `/${cityUrl}`);
   const res = await fiveDaysForecastStore.getItem(key);
@@ -81,7 +78,6 @@ const fiveDaysForecastLoader = async ({ request }) => {
 };
 
 const preferAction = async ({ params, request }) => {
-  console.log("preferAction", params, request);
   const data = {
     cityName: params.town,
     coords: params.coords,
