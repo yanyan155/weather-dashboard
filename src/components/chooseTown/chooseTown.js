@@ -13,9 +13,9 @@ const ChooseTown = () => {
     event.preventDefault();
     const selected = data[current];
 
-    submit(`lat=${selected.lat}&lon=${selected.lon}`, {
+    submit("", {
       method: "get",
-      action: `/${cityUrl}/${selected.name}/${currentForecastUrl}`,
+      action: `/${cityUrl}/${selected.name}/${selected.lat}-${selected.lon}/${currentForecastUrl}`,
     });
   };
 
@@ -23,8 +23,8 @@ const ChooseTown = () => {
     <>
       {isDataExists && (
         <div className="row ">
-          <div className="col-12 col-md-6 col-lg-4 col-xl-3">
-            <Form onSubmit={onSubmit} className="mt-4">
+          <div className="col-12 col-md-6 col-lg-4 col-xl-3 my-2 my-sm-2 mt-md-4">
+            <Form onSubmit={onSubmit}>
               <label htmlFor="choose-city-input" className="col-form-label">
                 Please select town
               </label>

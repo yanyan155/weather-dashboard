@@ -57,7 +57,6 @@ export default class DataStorageService {
   clearStaleData = async () => {
     try {
       const keysArr = await this.store.keys();
-      // console.log("keys before", keysArr);
       let keysDateArr = await Promise.allSettled(
         keysArr.map(async (el) => {
           const item = await this.store.getItem(el);
@@ -81,10 +80,57 @@ export default class DataStorageService {
           await this.store.removeItem(el.value.key);
         }
       });
-      // const keysArrnew = await this.store.keys();
-      // console.log("keys after", keysArrnew);
     } catch (err) {
       console.log(err);
     }
   };
 }
+
+class QueueDataStorageService {
+  constructor(name) {
+    this.store = localforage.createInstance({
+      name: name,
+    });
+    this.sizeLimit = 3;
+  }
+
+  setItem = async (value) => {
+    try {
+      let array = await this.store.getItem("array");
+      if (!array) array = [];
+      const index = array.findIndex((el) => this.compareObjects(el, value));
+
+      if (index !== -1) {
+        array = array.slice(0, index).concat(array.slice(index + 1));
+      }
+      array.unshift(value);
+      if (array.length > this.sizeLimit) {
+        array.pop();
+      }
+      await this.store.setItem("array", array);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  compareObjects(a, b) {
+    for (let key in a) {
+      if (a[key] !== b[key]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  getItems = async () => {
+    try {
+      let array = await this.store.getItem("array");
+      if (!array) array = [];
+      return array;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export { QueueDataStorageService };

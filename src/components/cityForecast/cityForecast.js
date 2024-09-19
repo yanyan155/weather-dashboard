@@ -1,26 +1,14 @@
-import { useParams, Outlet, useLocation, useFetcher } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import ChangeForecastButton from "../changeForecastButton/changeForecastButton";
+import FiveDaysForecast from "../fiveDaysForecast/fiveDaysForecast";
+import CurrentForecast from "../currentForecast/currentForecast";
+import PreferButton from "../preferButton/preferButton";
+
 import {
   fiveDaysForecastUrl,
   currentForecastText,
   fiveDaysForecastText,
 } from "../../utils/consts";
-
-const PreferButton = () => {
-  const fetcher = useFetcher();
-  return (
-    <fetcher.Form method="post">
-      {/* URL + forecast type */}
-      <button
-        className="btn btn-warning"
-        aria-labelledby="forecastTitle"
-        name="prefer"
-      >
-        prefer
-      </button>
-    </fetcher.Form>
-  );
-};
 
 const CityForecast = () => {
   let params = useParams();
@@ -29,8 +17,8 @@ const CityForecast = () => {
   const isFiveDaysForecast = location.pathname.includes(fiveDaysForecastUrl);
   return (
     <section>
-      <div className="d-flex flex-row align-items-center mt-4 mb-2">
-        <h2 className="h4 me-2" id="forecastTitle">
+      <div className="d-flex flex-row align-items-center mt-2 mt-sm-2 mt-md-4 mb-2">
+        <h2 className="h4 me-2 mb-0" id="forecastTitle">
           {isFiveDaysForecast ? fiveDaysForecastText : currentForecastText} for{" "}
           {params?.town}
         </h2>
@@ -39,7 +27,11 @@ const CityForecast = () => {
           isFiveDaysForecast={isFiveDaysForecast}
         ></ChangeForecastButton>
       </div>
-      <Outlet />
+      {isFiveDaysForecast ? (
+        <FiveDaysForecast></FiveDaysForecast>
+      ) : (
+        <CurrentForecast></CurrentForecast>
+      )}
     </section>
   );
 };
