@@ -5,12 +5,10 @@ import "./findCityForm.css";
 
 const FindCityForm = () => {
   const { cityName } = useLoaderData();
-  const navigation = useNavigation();
-  console.log(navigation);
+  const { location } = useNavigation();
 
   const searching =
-    navigation.location &&
-    new URLSearchParams(navigation.location.search).has("cityName");
+    location && new URLSearchParams(location.search).has("cityName");
 
   useEffect(() => {
     document.getElementById("cityName").value = cityName;

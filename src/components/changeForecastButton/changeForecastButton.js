@@ -7,15 +7,15 @@ import {
 } from "../../utils/consts";
 
 const ChangeForecastButton = ({ isFiveDaysForecast }) => {
-  let location = useLocation();
+  let { pathname, search } = useLocation();
   const navigate = useNavigate();
 
   const newPathname = isFiveDaysForecast
-    ? location.pathname.replace(fiveDaysForecastUrl, currentForecastUrl)
-    : location.pathname.replace(currentForecastUrl, fiveDaysForecastUrl);
+    ? pathname.replace(fiveDaysForecastUrl, currentForecastUrl)
+    : pathname.replace(currentForecastUrl, fiveDaysForecastUrl);
 
   const changeForecast = () => {
-    navigate(`${newPathname}${location.search}`);
+    navigate(`${newPathname}${search}`);
   };
   return (
     <button type="button" onClick={changeForecast} className="btn btn-info">
