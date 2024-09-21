@@ -1,3 +1,4 @@
+import React from "react";
 import { useFetcher } from "react-router-dom";
 
 const PreferButton = () => {

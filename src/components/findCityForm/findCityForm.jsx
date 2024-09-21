@@ -1,10 +1,9 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   Form,
   useLoaderData,
   useNavigation,
   useSubmit,
-  watch,
 } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { findUrl } from "../../utils/consts";
@@ -25,8 +24,6 @@ const FindCityForm = () => {
     },
     mode: "onChange",
   });
-
-  console.log("errors", errors); // errors.cityName
 
   const searching =
     location && new URLSearchParams(location.search).has("cityName");

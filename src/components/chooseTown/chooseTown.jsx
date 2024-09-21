@@ -1,3 +1,4 @@
+import React from "react";
 import { useLoaderData, Form, useSubmit, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { currentForecastUrl, cityUrl } from "../../utils/consts";

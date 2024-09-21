@@ -1,3 +1,4 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Preferences from "../preferences/preferences";
 import FindCityForm from "../findCityForm/findCityForm";

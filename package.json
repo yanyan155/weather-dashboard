@@ -7,14 +7,12 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
-    "react-router-dom": "^6.26.2",
-    "react-scripts": "5.0.1"
+    "react-router-dom": "^6.26.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite --open",
+    "build": "vite build",
+    "serve": "vite preview --open"
   },
   "eslintConfig": {
     "extends": [
@@ -39,6 +37,8 @@
     "npm": ">=10.8.1 <11.0.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@vitejs/plugin-react": "^4.3.1",
+    "vite": "^5.4.7"
   }
 }
