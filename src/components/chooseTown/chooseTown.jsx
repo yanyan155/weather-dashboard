@@ -16,7 +16,7 @@ const ChooseTown = () => {
 
     submit("", {
       method: "get",
-      action: `/${cityUrl}/${selected.name}/${selected.lat}-${selected.lon}/${currentForecastUrl}`,
+      action: `/${cityUrl}/${selected.name}/${selected.lat}X${selected.lon}/${currentForecastUrl}`,
     });
   };
 

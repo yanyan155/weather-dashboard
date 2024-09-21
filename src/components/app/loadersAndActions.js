@@ -42,7 +42,7 @@ const layoutLoader = async ({ request }) => {
 const getCoords = (url) => {
   const parts = url.split("/");
   const coords = parts[parts.length - 2];
-  return coords.split("-");
+  return coords.split("X");
 };
 
 const currentForecastLoader = async ({ request }) => {
